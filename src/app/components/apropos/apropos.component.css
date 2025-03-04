@@ -1,0 +1,430 @@
+/* src/app/components/apropos/apropos.component.css */
+.about-container {
+    width: 100%;
+    overflow-x: hidden;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Styles pour la section d'en-tête */
+  .header-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dhivn2ahm/image/upload/v1740678747/about-header_bnqrmp.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+  
+  .header-section .overlay {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+  }
+  
+  .header-section h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .header-section p {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Styles pour la ligne décorative */
+  .decorative-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  .line-segment-1 {
+    height: 3px;
+    width: 60px;
+    background-color: #3b82f6;
+    border-radius: 3px;
+  }
+  
+  .line-segment-2 {
+    height: 3px;
+    width: 30px;
+    background-color: #60a5fa;
+    border-radius: 3px;
+  }
+  
+  .line-segment-3 {
+    height: 3px;
+    width: 15px;
+    background-color: #93c5fd;
+    border-radius: 3px;
+  }
+  
+  /* Styles pour la section mission */
+  .mission-section {
+    padding: 100px 0;
+    background-color: #f8fafc;
+  }
+  
+  .mission-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+  }
+  
+  .mission-text {
+    flex: 1;
+  }
+  
+  .mission-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #1e40af;
+    font-weight: 700;
+  }
+  
+  .mission-text .decorative-line {
+    justify-content: flex-start;
+  }
+  
+  .mission-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #4b5563;
+  }
+  
+  .mission-image {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .mission-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+  }
+  
+  .mission-image img:hover {
+    transform: scale(1.03);
+  }
+  
+  .learn-more-btn {
+    background-color: #3b82f6;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.4);
+  }
+  
+  .learn-more-btn:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px -1px rgba(59, 130, 246, 0.5);
+  }
+  
+  /* Styles pour la section statistiques */
+  .stats-section {
+    background-color: #3b82f6;
+    padding: 80px 0;
+    color: white;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .stat-card {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-10px);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .stat-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  /* Styles pour la section équipe */
+  .team-section {
+    padding: 100px 0;
+    background-color: white;
+    text-align: center;
+  }
+  
+  .team-section h2 {
+    font-size: 2.5rem;
+    color: #1e40af;
+    font-weight: 700;
+  }
+  
+  .section-intro {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 50px;
+    color: #4b5563;
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+  }
+  
+  .team-member {
+    background-color: #f8fafc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding-bottom: 30px;
+  }
+  
+  .team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .member-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+  }
+  
+  .member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .team-member:hover .member-image img {
+    transform: scale(1.05);
+  }
+  
+  .team-member h3 {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e40af;
+  }
+  
+  .member-role {
+    color: #3b82f6;
+    font-weight: 600;
+    margin: 5px 0 15px;
+  }
+  
+  .member-bio {
+    padding: 0 25px;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+  
+  /* Styles pour la section témoignages */
+  .testimonials-section {
+    padding: 100px 0;
+    background-color: #f0f9ff;
+    text-align: center;
+  }
+  
+  .testimonials-section h2 {
+    font-size: 2.5rem;
+    color: #1e40af;
+    font-weight: 700;
+  }
+  
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+  
+  .testimonial-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px 30px;
+    text-align: left;
+    position: relative;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .testimonial-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .quote-icon {
+    font-size: 4rem;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #dbeafe;
+    font-family: Georgia, serif;
+    line-height: 0.6;
+  }
+  
+  .testimonial-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .testimonial-author {
+    border-top: 2px solid #e5e7eb;
+    padding-top: 15px;
+  }
+  
+  .author-name {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 5px;
+  }
+  
+  .author-title {
+    color: #6b7280;
+    font-size: 0.9rem;
+  }
+  
+  /* Styles pour la section CTA */
+  .cta-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dhivn2ahm/image/upload/v1740678747/cta-background_ckmvor.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    text-align: center;
+    color: white;
+  }
+  
+  .cta-section .overlay {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  .cta-button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.4);
+  }
+  
+  .cta-button:hover {
+    background-color: #2563eb;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px -3px rgba(59, 130, 246, 0.5);
+  }
+  
+  /* Media queries pour la responsivité */
+  @media (max-width: 768px) {
+    .mission-content {
+      flex-direction: column;
+    }
+    
+    .header-section h1 {
+      font-size: 2.5rem;
+    }
+    
+    .header-section p {
+      font-size: 1.2rem;
+    }
+    
+    .mission-text h2, 
+    .team-section h2, 
+    .testimonials-section h2, 
+    .cta-section h2 {
+      font-size: 2rem;
+    }
+    
+    .stat-card {
+      padding: 15px;
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header-section {
+      height: 300px;
+    }
+    
+    .header-section h1 {
+      font-size: 2rem;
+    }
+    
+    .team-member, 
+    .testimonial-card {
+      padding: 20px;
+    }
+    
+    .mission-section, 
+    .team-section, 
+    .testimonials-section, 
+    .cta-section {
+      padding: 60px 0;
+    }
+  }

@@ -9,39 +9,53 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:4000/api/auth'; // URL de votre API NestJS
+  private apiUrl = 'http://localhost:4000/api/auth';
+  private tokenKey = 'authToken';
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // Méthode pour l'enregistrement
   register(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, { email, password }).pipe(
       tap((response) => {
         console.log('Registration successful', response);
-        this.router.navigate(['/auth/login']); // Rediriger vers la page de connexion après l'inscription
+        this.router.navigate(['/auth/login']);
       })
     );
   }
 
-  // Méthode pour la connexion
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
       tap((response: any) => {
         console.log('Login successful', response);
-        localStorage.setItem('token', response.token); // Stocker le token JWT dans le localStorage
-        this.router.navigate(['/']); // Rediriger vers la page d'accueil après la connexion
+        
+        // S'assurer que nous stockons le bon token
+        if (response.access_token) {
+          localStorage.setItem(this.tokenKey, response.access_token);
+          console.log('Token stored:', response.access_token);
+        } else if (response.token) {
+          localStorage.setItem(this.tokenKey, response.token);
+          console.log('Token stored:', response.token);
+        } else {
+          console.error('No token found in the response', response);
+        }
+        
+        this.router.navigate(['/']);
       })
     );
   }
 
-  // Méthode pour vérifier si l'utilisateur est connecté
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return !!this.getToken();
   }
 
-  // Méthode pour déconnecter l'utilisateur
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.tokenKey);
     this.router.navigate(['/auth/login']);
+  }
+  
+  getToken(): string | null {
+    const token = localStorage.getItem(this.tokenKey);
+    console.log('Getting token from localStorage:', token);
+    return token;
   }
 }

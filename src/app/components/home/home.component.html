@@ -1,31 +1,37 @@
 <!-- src/app/components/home/home.component.html -->
-<div class="min-h-screen bg-cover bg-center flex flex-col items-center justify-center" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/dhivn2ahm/image/upload/v1740678747/image2_abrgrm.jpg)'}">
-    <!-- Navbar -->
-    <app-nav></app-nav>
-  
-    <!-- Hero Section -->
-    <div class="flex-grow flex flex-col items-center justify-center text-center hero-section">
-      <h1 class="text-6xl font-bold text-white mb-4 animate-fade-in">
-        Best Online Learning Resources!
-      </h1>
-      <p class="text-xl text-gray-200 mb-8 animate-fade-in delay-100">
-        Make Your Free Account & Get Discounts
-      </p>
-      <button class="bg-blue-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300 animate-fade-in delay-200">
-        Enroll Now
-      </button>
-    </div>
-  
-    <!-- Courses Section -->
-    <div class="mt-16 text-center">
-      <h2 class="text-4xl font-bold text-white mb-8 animate-fade-in delay-300">
-        Award Winning Courses
-      </h2>
-      <p class="text-lg text-gray-200 animate-fade-in delay-400">
-        Based on Latest Knowledge
-      </p>
+<div class="min-h-screen bg-cover bg-center flex flex-col items-center" [ngStyle]="{'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(https://res.cloudinary.com/dhivn2ahm/image/upload/v1740678747/image2_abrgrm.jpg)'}">
+  <!-- Navbar -->
+  <app-nav></app-nav>
+
+  <!-- Hero Section -->
+  <div class="flex-grow flex flex-col items-center justify-center text-center hero-section px-4">
+    <h1 class="text-6xl font-bold text-white mb-6 animate-fade-in text-shadow">
+      Best Online Learning Resources!
+    </h1>
+    <p class="text-xl text-white mb-10 animate-fade-in delay-100 max-w-2xl">
+      Make Your Free Account & Get Discounts
+    </p>
+    <button class="bg-blue-600 text-white px-10 py-4 rounded-lg shadow-xl hover:bg-blue-700 transition-all duration-300 animate-fade-in delay-200 hover:transform hover:scale-105">
+      Enroll Now
+    </button>
+  </div>
+
+  <!-- Courses Section -->
+  <div class="mb-16 text-center px-4">
+    <h2 class="text-4xl font-bold text-white mb-4 animate-fade-in delay-300 text-shadow">
+      Award Winning Courses
+    </h2>
+    <p class="text-xl text-white animate-fade-in delay-400 mb-6">
+      Based on Latest Knowledge
+    </p>
+    <div class="flex justify-center space-x-4 animate-fade-in delay-500">
+      <div class="h-2 w-20 bg-blue-600 rounded-full"></div>
+      <div class="h-2 w-10 bg-blue-400 rounded-full"></div>
+      <div class="h-2 w-5 bg-blue-300 rounded-full"></div>
     </div>
   </div>
-  
-  <div class="w-8 h-8 bg-blue-600 rounded-full fixed top-0 left-0 pointer-events-none" [ngStyle]="cursorStyle"></div>
-  
+</div>
+
+<div class="w-8 h-8 bg-blue-600 rounded-full fixed top-0 left-0 pointer-events-none" [ngStyle]="cursorStyle"></div>
+<app-apropos></app-apropos>
+<app-bibliotheque></app-bibliotheque>

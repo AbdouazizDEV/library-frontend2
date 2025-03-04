@@ -1,51 +1,51 @@
 /* src/app/components/nav/nav.component.css */
 nav {
-    transition: all 0.3s ease;
-  }
-  
-  nav a {
-    transition: color 0.3s ease;
-  }
-  nav {
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333333;
-    transition: color 0.3s;
-  }
-  
-  .logo:hover {
-    color: #007bff;
-  }
-  
-  .nav-links a {
-    color: #6b7280;
-    transition: color 0.3s;
-  }
-  
-  .nav-links a:hover {
-    color: #007bff;
-  }
-  
-  .enroll-button {
-    background-color: #007bff;
-    color: #ffffff;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    transition: background-color 0.3s;
-  }
-  
-  .enroll-button:hover {
-    background-color: #0056b3;
-  }
-  
+  transition: all 0.4s ease;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+nav a {
+  transition: color 0.3s ease, transform 0.3s ease;
+  position: relative;
+}
+
+nav a:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #3b82f6;
+  transition: width 0.3s ease;
+}
+
+nav a:hover:after {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  background-color: rgb(0, 132, 255);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(18, 104, 241, 0.5);
+  background-color: #f5a623;
+}

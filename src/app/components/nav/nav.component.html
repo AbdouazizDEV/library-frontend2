@@ -1,24 +1,22 @@
-<!-- src/app/components/nav/nav.component.html -->
-<nav class="w-full bg-white shadow-lg fixed top-0 z-50">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <!-- Logo -->
-      <a href="#" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">
-        Educate
-      </a>
-  
-      <!-- Liens de navigation -->
-      <div class="flex space-x-6">
-        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Home</a>
-        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Course</a>
-        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Blog</a>
-        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Pages</a>
-        <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Contact</a>
-      </div>
-  
-      <!-- Bouton "Enroll Now" -->
-      <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300">
-        Enroll Now
-      </button>
+<nav class="w-full bg-transparent fixed top-0 z-50 transition-all duration-300 py-2">
+  <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+    <!-- Logo -->
+    <a href="#" class="text-2xl font-bold text-white hover:text-blue-300 transition-colors duration-300">
+      Educate
+    </a>
+
+    <!-- Liens de navigation -->
+    <div class="hidden md:flex space-x-8">
+      <a (click)="navigate('/home')" class="text-white hover:text-blue-300 transition-colors duration-300 font-medium cursor-pointer" style="margin: 1pc; font-size: x-large;">Home</a>
+      <a (click)="navigate('/bibliotheque')" class="text-white hover:text-blue-300 transition-colors duration-300 font-medium cursor-pointer" style="margin: 1pc; font-size: x-large;">Bibliotheque</a>
+      <a (click)="navigate('/apropos')" class="text-white hover:text-blue-300 transition-colors duration-300 font-medium cursor-pointer" style="margin: 1pc; font-size: x-large;">A propos</a>
+      <a (click)="navigate('/pages')" class="text-white hover:text-blue-300 transition-colors duration-300 font-medium cursor-pointer" style="margin: 1pc; font-size: x-large;">Pages</a>
+      <a (click)="navigate('/contact')" class="text-white hover:text-blue-300 transition-colors duration-300 font-medium cursor-pointer" style="margin: 1pc; font-size: x-large;">Contact</a>
     </div>
-  </nav>
-  
+
+    <!-- Bouton "Déconnexion" -->
+    <button (click)="logout()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:transform hover:scale-105">
+      Déconnexion
+    </button>
+  </div>
+</nav>

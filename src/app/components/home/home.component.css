@@ -1,62 +1,87 @@
 /* src/app/components/home/home.component.css */
 @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  
-  .animate-fade-in {
-    animation: fadeIn 2s ease-out forwards;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .delay-100 {
-    animation-delay: 0.2s;
-  }
-  
-  .delay-200 {
-    animation-delay: 0.3s;
-  }
-  
-  .delay-300 {
-    animation-delay: 0.4s;
-  }
-  
-  .delay-400 {
-    animation-delay: 0.4s;
-  }
-  
-  .bg-cover {
-    background-size: cover;
-  }
-  
-  .bg-center {
-    background-position: center;
-  }
-  
-  .text-white {
-    color: #ffffff;
-  }
-  
-  .text-gray-200 {
-    color: #a0aec0;
-  }
-  
-  .pointer-events-none {
-    pointer-events: none;
-  }
-  
-  .hero-section {
-    flex: 1;
-    width: 100%;
-    height: 100vh; /* Occupe toute la hauteur de la vue */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
+}
+
+.animate-fade-in {
+  animation: fadeIn 1.5s ease-out forwards;
+}
+
+.delay-100 {
+  animation-delay: 0.2s;
+}
+
+.delay-200 {
+  animation-delay: 0.4s;
+}
+
+.delay-300 {
+  animation-delay: 0.6s;
+}
+
+.delay-400 {
+  animation-delay: 0.7s;
+}
+
+.delay-500 {
+  animation-delay: 0.8s;
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.hero-section {
+  flex: 1;
+  width: 100%;
+  height: calc(100vh - 100px); /* Adjust for navbar height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px; /* Space for navbar */
+}
+button {
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  background-color: rgb(0, 132, 255);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(18, 104, 241, 0.5);
+  background-color: #f5a623;
+}
+/* button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+} */

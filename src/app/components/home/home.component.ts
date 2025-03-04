@@ -3,10 +3,12 @@ import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgStyle } from '@angular/common';
 import { NavComponent } from '../nav/nav.component'; // Importer NavComponent
+import {AproposComponent} from '../apropos/apropos.component';
+import {BibliothequeComponent} from '../bibliotheque/bibliotheque.component'
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NgStyle, NavComponent], // Importer NgStyle et NavComponent
+  imports: [CommonModule, NgStyle, NavComponent,AproposComponent,BibliothequeComponent], // Importer NgStyle et NavComponent
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
