@@ -1,177 +1,177 @@
-// src/app/components/bibliotheque/bibliotheque.component.ts
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import * as bootstrap from 'bootstrap';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { BooksService, Book } from '../../services/books.service';
+import { DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
+interface Book {
+  id?: number;
+  title: string;
+  author: string;
+  publishedDate: string;
+  category: string;
+  rating?: number;
+  reviews?: any[];
+}
+declare module 'bootstrap';
 @Component({
   selector: 'app-bibliotheque',
-  standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  
+  imports: [ FormsModule,CommonModule],
+  providers: [DatePipe], // If you're using services, add them here
   templateUrl: './bibliotheque.component.html',
-  styleUrls: ['bibliotheque.component.css']
+  styleUrls: ['./bibliotheque.component.css']
 })
 export class BibliothequeComponent implements OnInit {
   books: Book[] = [];
-  currentPage = 1;
-  totalPages = 0;
-  loading = false;
-  searchTerm = '';
-  categories: string[] = ['Fiction', 'Science-Fiction', 'Biographie', 'Histoire', 'Développement Personnel'];
-  currentCategory = 'all';
+  categories: string[] = ['Action', 'Romance', 'Science-Fiction', 'Histoire', 'Jeunesse'];
+  loading: boolean = true;
+  searchTerm: string = '';
+  currentCategory: string = 'all';
+  currentPage: number = 1;
+  totalPages: number = 1;
 
-  constructor(private booksService: BooksService) {}
+  // New Book Modal Properties
+  newBook: Book = {
+    title: '',
+    author: '',
+    publishedDate: '',
+    category: ''
+  };
 
-  ngOnInit(): void {
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
     this.loadBooks();
   }
 
-  loadBooks(): void {
+  loadBooks() {
     this.loading = true;
-    this.booksService.getBooks(this.currentPage).subscribe({
+    // Adjust the URL to match your backend endpoint
+    this.http.get<any>('http://localhost:4000/api/books').subscribe({
       next: (response) => {
-        console.log('Books response:', response);
-        this.books = response.data;
-        this.totalPages = response.totalPages;
+        this.books = response.data || response;
         this.loading = false;
-
-        // Extrait les catégories uniques des livres (si votre API ne fournit pas déjà une liste)
-        if (response.data.length > 0) {
-          const uniqueCategories = [...new Set(response.data.map(book => book.category))];
-          if (uniqueCategories.length > 0) {
-            this.categories = uniqueCategories;
-          }
-        }
+        this.totalPages = Math.ceil(this.books.length / 8); // Assuming 8 books per page
       },
       error: (error) => {
-        console.error('Error fetching books:', error);
+        console.error('Error loading books', error);
         this.loading = false;
       }
     });
   }
 
-  onPageChange(page: number | string): void {
-    // Ignorer si page est une chaîne (comme '...')
-    if (typeof page !== 'number') return;
+  openAddBookModal() {
+    // Use Bootstrap's modal method to show the modal
+    const modal = new bootstrap.Modal(document.getElementById('addBookModal')!);
     
-    if (page < 1 || page > this.totalPages) return;
-    this.currentPage = page;
-    this.loadBooks();
-    
-    // Smooth scroll to top of results
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    modal.show();
   }
 
-  searchBooks(): void {
-    if (this.searchTerm.trim() === '' && this.currentCategory === 'all') {
+  addBook() {
+    // Validate the form
+    if (!this.newBook.title || !this.newBook.author || !this.newBook.publishedDate || !this.newBook.category) {
+      alert('Veuillez remplir tous les champs');
+      return;
+    }
+
+    // Send POST request to add a new book
+    this.http.post('http://localhost:4000/api/books', this.newBook).subscribe({
+      next: (response) => {
+        // Add the new book to the list
+        this.books.unshift(response as Book);
+        
+        // Reset the form
+        this.newBook = {
+          title: '',
+          author: '',
+          publishedDate: '',
+          category: ''
+        };
+
+        // Close the modal
+        const modalElement = document.getElementById('addBookModal') ?? document.body;
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance?.hide();
+
+        // Optional: Show success message
+        alert('Livre ajouté avec succès !');
+      },
+      error: (error) => {
+        console.error('Erreur lors de l\'ajout du livre', error);
+        alert('Erreur lors de l\'ajout du livre');
+      }
+    });
+  }
+
+  // Search functionality
+  searchBooks() {
+    if (!this.searchTerm.trim()) {
       this.loadBooks();
       return;
     }
 
-    this.loading = true;
-    this.booksService.searchBooks(this.searchTerm).subscribe({
-      next: (response) => {
-        this.books = response.data;
-        
-        // Si une catégorie est sélectionnée, filtrer les résultats
-        if (this.currentCategory !== 'all') {
-          this.books = this.books.filter(book => book.category === this.currentCategory);
-        }
-        
-        this.totalPages = response.totalPages;
-        this.loading = false;
-      },
-      error: (error) => {
-        console.error('Error searching books:', error);
-        this.loading = false;
-      }
-    });
+    // Filter books based on search term
+    this.books = this.books.filter(book => 
+      book.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      book.author.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      book.category.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 
-  filterByCategory(category: string): void {
+  // Category filtering
+  filterByCategory(category: string) {
     this.currentCategory = category;
     
-    if (this.searchTerm.trim() === '' && category === 'all') {
+    if (category === 'all') {
       this.loadBooks();
       return;
     }
-    
-    this.loading = true;
-    
-    if (category === 'all') {
-      // Si 'Tous' est sélectionné, utilise la recherche normale
-      this.searchBooks();
-    } else {
-      // Sinon, filtre par catégorie
-      this.booksService.getBooks(1, 20).subscribe({
-        next: (response) => {
-          let filteredBooks = response.data;
-          
-          // Appliquer le filtre de catégorie
-          filteredBooks = filteredBooks.filter(book => book.category === category);
-          
-          // Appliquer la recherche si un terme est présent
-          if (this.searchTerm.trim() !== '') {
-            const term = this.searchTerm.toLowerCase();
-            filteredBooks = filteredBooks.filter(book => 
-              book.title.toLowerCase().includes(term) || 
-              book.author.toLowerCase().includes(term)
-            );
-          }
-          
-          this.books = filteredBooks;
-          this.totalPages = Math.ceil(filteredBooks.length / 5);
-          this.loading = false;
-        },
-        error: (error) => {
-          console.error('Error filtering books:', error);
-          this.loading = false;
-        }
-      });
+
+    // Filter books by selected category
+    this.books = this.books.filter(book => book.category === category);
+  }
+
+  // Pagination methods
+  onPageChange(page: number | string) {
+    if (typeof page === 'number' && page > 0 && page <= this.totalPages) {
+      this.currentPage = page;
     }
   }
 
-  resetSearch(): void {
+  getPageArray(): number[] {
+    return Array.from({length: this.totalPages}, (_, i) => i + 1);
+  }
+
+  getSmartPagination(): (number | string)[] {
+    if (this.totalPages <= 7) {
+      return this.getPageArray();
+    }
+
+    const currentPage = this.currentPage;
+    const totalPages = this.totalPages;
+
+    if (currentPage <= 4) {
+      return [1, 2, 3, 4, 5, '...', totalPages];
+    }
+
+    if (currentPage >= totalPages - 3) {
+      return [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+    }
+
+    return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+  }
+
+  // Helper method for star rating
+  getStarArray(rating: number = 0): number[] {
+    return Array(5).fill(0).map((_, index) => index < Math.round(rating) ? 1 : 0);
+  }
+
+  // Reset search
+  resetSearch() {
     this.searchTerm = '';
     this.currentCategory = 'all';
     this.loadBooks();
   }
-
-  getStarArray(rating: number): number[] {
-    return Array(5).fill(0).map((_, i) => i < Math.round(rating) ? 1 : 0);
-  }
-  
-  getPageArray(): number[] {
-    return Array(this.totalPages).fill(0).map((_, i) => i + 1);
-  }
-  
-  getSmartPagination(): (number | string)[] {
-    const visiblePages: (number | string)[] = [];
-  
-    // Toujours afficher la première page
-    visiblePages.push(1);
-  
-    if (this.currentPage > 3) {
-      visiblePages.push('...');
-    }
-  
-    // Pages autour de la page actuelle
-    for (let i = Math.max(2, this.currentPage - 1); i <= Math.min(this.totalPages - 1, this.currentPage + 1); i++) {
-      visiblePages.push(i);
-    }
-  
-    if (this.currentPage < this.totalPages - 2) {
-      visiblePages.push('...');
-    }
-  
-    // Toujours afficher la dernière page si elle existe
-    if (this.totalPages > 1) {
-      visiblePages.push(this.totalPages);
-    }
-  
-    console.log('Visible pages:', visiblePages); // Ajouter un log pour vérifier les types
-    return visiblePages;
-  }
-  
 }
